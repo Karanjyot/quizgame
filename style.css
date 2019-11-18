@@ -12,3 +12,15 @@
 .list-group {
     padding-top:20px;
 }
+
+#start {
+    margin-left: 465px;
+}
+
+li {
+
+    margin-top:20px;
+    background-color: aqua;
+    width: 200px;
+    margin:auto;
+}

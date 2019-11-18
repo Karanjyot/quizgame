@@ -1,31 +1,70 @@
-var q1El= document.getElementById("qone");
-var q2El= document.getElementById("qtwo");
-var q3El= document.getElementById("qthree");
-var q4El= document.getElementById("qfour");
+var q1El = document.getElementById("qone");
+var q2El = document.getElementById("qtwo");
+var q3El = document.getElementById("qthree");
+var q4El = document.getElementById("qfour");
 var quesEl = document.getElementById("ques")
 var timerEl = document.getElementById("timer");
 var h1El = document.getElementById("h1tag");
 var listgroupEl = document.getElementById("list-group");
+var startEl = document.getElementById("start");
+var playagainEl = document.getElementById("playagain");
+var highscoresEl = document.getElementById("highscores");
+var highscorelistEl = document.getElementById("jumbotronhighscores");
+var highscoresfinishEl = document.getElementById("highscoresfinish");
+var counter = 75;
 
-var counter = 3;
+var scorearr = []
 
-function timeIt (){
-    counter--
-    timerEl.innerText = counter 
-  
+init()
+
+function init() {
+    // Get stored todos from localStorage
+    // Parsing the JSON string to an object
+    var scoress = JSON.parse(localStorage.getItem("high"));
+
+    // If todos were retrieved from localStorage, update the todos array to it
+    if (scoress !== null) {
+        scorearr = scoress;
+    }
 }
-setInterval(timeIt, 1000);
 
-    
-function main(){
+function storeTodos() {
+    // Stringify and set "todos" key in localStorage to todos array
+    localStorage.setItem("high", JSON.stringify(scorearr));
+}
 
-    if ( questions.length ===0) {
 
-            alert("you win!")
-        }
-          
-    i = Math.floor(Math.random()*questions.length)
-    quesEl.innerHTML = questions[i].title;  
+document.getElementById("jumbotronid").style.display = "none";
+document.getElementById("jumbotronfinish").style.display = "none";
+highscorelistEl.style.display = "none";
+
+startEl.addEventListener("click", function () {
+    document.getElementById("jumbotronid").style.display = "block";
+
+    function timeIt() {
+        counter--
+        timerEl.innerText = counter
+
+    }
+    timeint = setInterval(timeIt, 1000);
+    document.getElementById("jumbotronstart").style.display = "none";
+    highscorelistEl.style.display = "none";
+});
+
+
+
+function main() {
+
+    if (questions.length === 0) {
+
+        document.getElementById("gameover").innerHTML = "Game Over! Your final score was: " + counter;
+        document.getElementById("jumbotronfinish").style.display = "block";
+        document.getElementById("jumbotronid").style.display = "none";
+        clearInterval(timeint);
+    }
+
+    i = Math.floor(Math.random() * questions.length)
+    quesEl.innerHTML = questions[i].title;
     q1El.innerHTML = questions[i].choices[0]
     q2El.innerHTML = questions[i].choices[1]
     q3El.innerHTML = questions[i].choices[2]
@@ -34,61 +73,119 @@ function main(){
 
 main();
 
-    q1El.addEventListener("click",function() {
 
-        if(q1El.innerHTML===questions[i].answer){
-            questions.splice(i,1);
-            main();
-            console.log(i);
-            
-        }else{
+q1El.addEventListener("click", function () {
 
-            counter = counter - 15;
-        }
-     });
-     
-     q2El.addEventListener("click",function() {
-     
-        if(q2El.innerHTML===questions[i].answer) {
-            questions.splice(i,1);
-            main();
-            console.log(i);  
-        }else{
+    if (q1El.innerHTML === questions[i].answer) {
+        questions.splice(i, 1);
+        main();
+        console.log(i);
 
-            counter = counter - 15;
-        }
-      });
-     
-      
-      q3El.addEventListener("click",function() {
-     
-        if(q3El.innerHTML===questions[i].answer) {
-            questions.splice(i,1);
-            main();
-            console.log(i);
-            
-        } else{
+    } else {
 
-            counter = counter - 15;
-        }
-      });
-     
-      q4El.addEventListener("click",function() {
-     
-        if(q4El.innerHTML===questions[i].answer) {
-            questions.splice(i,1);
-            main();
-            console.log(i);
-            
-        }else{
+        counter = counter - 15;
+    }
+});
 
-            counter = counter - 15;
-        }
-      });
+q2El.addEventListener("click", function () {
+
+    if (q2El.innerHTML === questions[i].answer) {
+        questions.splice(i, 1);
+        main();
+        console.log(i);
+    } else {
+
+        counter = counter - 15;
+    }
+});
+
+
+q3El.addEventListener("click", function () {
+
+    if (q3El.innerHTML === questions[i].answer) {
+        questions.splice(i, 1);
+        main();
+        console.log(i);
+
+    } else {
+
+        counter = counter - 15;
+    }
+});
+
+q4El.addEventListener("click", function () {
+
+    if (q4El.innerHTML === questions[i].answer) {
+        questions.splice(i, 1);
+        main();
+        console.log(i);
+
+    } else {
+
+        counter = counter - 15;
+    }
+});
+
+playagainEl.addEventListener("click", function () {
+    window.location.reload();
+
+});
+
+highscoresEl.addEventListener("click", function () {
+    highscorelistEl.style.display = "block";
+
+    for (var i = 0; i < scorearr.length; i++) {
+
+
+        var newscore = scorearr[i];
+        var newli = document.createElement("li")
+        var textnode = document.createTextNode(newscore);
+        newli.appendChild(textnode);
+        document.getElementById("highscorelist").appendChild(newli);
+        storeTodos()
+        console.log(scorearr);
+
+    }
+
     
+   
+});
+
+
+highscoresfinishEl.addEventListener("click", highscoretracker); 
+
+
+
+
+
+
+function highscoretracker() {
+
+    highscorelistEl.style.display = "block";
+
+    scorearr.push(counter);
+
+
+    scorearr.sort(function (a, b) { return b - a });
+    scorearr.length = 5;
     
 
+    for (var i = 0; i < scorearr.length; i++) {
 
+
+        var newscore = scorearr[i];
+        var newli = document.createElement("li")
+        var textnode = document.createTextNode(newscore);
+        newli.appendChild(textnode);
+        document.getElementById("highscorelist").appendChild(newli);
+        storeTodos()
+        console.log(scorearr);
+
+    }
+    highscoresfinishEl.removeEventListener("click", highscoretracker);
+}
+
+ 
 
 
 
