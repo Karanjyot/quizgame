@@ -18,18 +18,16 @@ var scorearr = []
 init()
 
 function init() {
-    // Get stored todos from localStorage
-    // Parsing the JSON string to an object
+ 
     var scoress = JSON.parse(localStorage.getItem("high"));
 
-    // If todos were retrieved from localStorage, update the todos array to it
     if (scoress !== null) {
         scorearr = scoress;
     }
 }
 
 function storeTodos() {
-    // Stringify and set "todos" key in localStorage to todos array
+   
     localStorage.setItem("high", JSON.stringify(scorearr));
 }
 
@@ -55,7 +53,7 @@ startEl.addEventListener("click", function () {
 
 function main() {
 
-    if (questions.length === 0) {
+    if (questions.length === 0 ) {
 
         document.getElementById("gameover").innerHTML = "Game Over! Your final score was: " + counter;
         document.getElementById("jumbotronfinish").style.display = "block";
@@ -74,12 +72,15 @@ function main() {
 main();
 
 
+
+
 q1El.addEventListener("click", function () {
 
     if (q1El.innerHTML === questions[i].answer) {
         questions.splice(i, 1);
         main();
         console.log(i);
+        
 
     } else {
 
@@ -106,6 +107,7 @@ q3El.addEventListener("click", function () {
         questions.splice(i, 1);
         main();
         console.log(i);
+       
 
     } else {
 
@@ -139,51 +141,34 @@ highscoresEl.addEventListener("click", function () {
 
         var newscore = scorearr[i];
         var newli = document.createElement("li")
+        newli.className = "list-group-item list-group-item-primary"
         var textnode = document.createTextNode(newscore);
         newli.appendChild(textnode);
         document.getElementById("highscorelist").appendChild(newli);
         storeTodos()
-        console.log(scorearr);
-
-    }
-
-    
-   
-});
+        console.log(scorearr);} 
+}, {once : true});
 
 
-highscoresfinishEl.addEventListener("click", highscoretracker); 
-
-
-
-
-
-
-function highscoretracker() {
+highscoresfinishEl.addEventListener("click", function(){
 
     highscorelistEl.style.display = "block";
-
     scorearr.push(counter);
-
-
     scorearr.sort(function (a, b) { return b - a });
     scorearr.length = 5;
     
-
     for (var i = 0; i < scorearr.length; i++) {
-
 
         var newscore = scorearr[i];
         var newli = document.createElement("li")
+        newli.className = "list-group-item list-group-item-primary"
         var textnode = document.createTextNode(newscore);
         newli.appendChild(textnode);
         document.getElementById("highscorelist").appendChild(newli);
         storeTodos()
-        console.log(scorearr);
+        console.log(scorearr);}
+}, {once : true});
 
-    }
-    highscoresfinishEl.removeEventListener("click", highscoretracker);
-}
 
  
 
