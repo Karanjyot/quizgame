@@ -25,9 +25,43 @@ li {
     margin:auto;
 }
 
-/*#jumbotronstart {
+@media screen and (max-width: 480px) {
 
-    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzmgrhQKHuSJdFwRkoLPliZwDtkMWEUooi1NRGqFYtyr5R48dK&s");
-    background-repeat: no-repeat;
-}
-*/
+    #start {
+    
+        margin-left: 80px;
+        margin-top: 20px;
+        
+    } 
+
+    #highscores {
+
+        margin-top:20px;
+    }
+
+    #jumbotronid {
+
+        width:375px;
+        height: 812px;
+    }
+    #jumbotronstart {
+
+        width:350px;
+        height: 812px;
+
+        color: white;
+    }
+    #jumbotronstart {
+
+        background-image: url("https://i.pinimg.com/originals/53/a2/a3/53a2a3a4f90804ad4e50d2d4ae78f027.jpg");
+        background-repeat: no-repeat;
+    }
+    
+    
+
+    #timer {
+
+        margin-left: 300px;
+    }
+    }
+

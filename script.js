@@ -11,6 +11,8 @@ var playagainEl = document.getElementById("playagain");
 var highscoresEl = document.getElementById("highscores");
 var highscorelistEl = document.getElementById("jumbotronhighscores");
 var highscoresfinishEl = document.getElementById("highscoresfinish");
+var audiowrongEl = document.getElementById("audiowrong");
+var audiocorrectEl = document.getElementById("audiocorrect");
 var counter = 75;
 
 var scorearr = []
@@ -47,6 +49,7 @@ startEl.addEventListener("click", function () {
     timeint = setInterval(timeIt, 1000);
     document.getElementById("jumbotronstart").style.display = "none";
     highscorelistEl.style.display = "none";
+    audiocorrectEl.play();
 });
 
 
@@ -79,12 +82,13 @@ q1El.addEventListener("click", function () {
     if (q1El.innerHTML === questions[i].answer) {
         questions.splice(i, 1);
         main();
-        console.log(i);
+        audiocorrectEl.play();
         
 
     } else {
 
         counter = counter - 15;
+        audiowrongEl.play();
     }
 });
 
@@ -93,10 +97,11 @@ q2El.addEventListener("click", function () {
     if (q2El.innerHTML === questions[i].answer) {
         questions.splice(i, 1);
         main();
-        console.log(i);
+        audiocorrectEl.play();
     } else {
 
         counter = counter - 15;
+        audiowrongEl.play();
     }
 });
 
@@ -106,12 +111,13 @@ q3El.addEventListener("click", function () {
     if (q3El.innerHTML === questions[i].answer) {
         questions.splice(i, 1);
         main();
-        console.log(i);
+        audiocorrectEl.play();
        
 
     } else {
 
         counter = counter - 15;
+        audiowrongEl.play();
     }
 });
 
@@ -120,11 +126,12 @@ q4El.addEventListener("click", function () {
     if (q4El.innerHTML === questions[i].answer) {
         questions.splice(i, 1);
         main();
-        console.log(i);
+        audiocorrectEl.play();
 
     } else {
 
         counter = counter - 15;
+        audiowrongEl.play();
     }
 });
 
