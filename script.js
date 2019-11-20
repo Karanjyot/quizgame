@@ -5,7 +5,7 @@ var q4El = document.getElementById("qfour");
 var quesEl = document.getElementById("ques")
 var timerEl = document.getElementById("timer");
 var h1El = document.getElementById("h1tag");
-var listgroupEl = document.getElementById("list-group");
+var listgroupEl = document.querySelector(".list-group");
 var startEl = document.getElementById("start");
 var playagainEl = document.getElementById("playagain");
 var highscoresEl = document.getElementById("highscores");
@@ -44,6 +44,13 @@ startEl.addEventListener("click", function () {
     function timeIt() {
         counter--
         timerEl.innerText = counter
+
+        if(counter === 0 || counter <0) {
+
+            document.getElementById("jumbotronfinish").style.display = "block";
+            document.getElementById("jumbotronid").style.display = "none";
+            document.getElementById("gameover").innerHTML = "Game Over! You ran out of time."
+        }
 
     }
     timeint = setInterval(timeIt, 1000);
@@ -89,6 +96,8 @@ q1El.addEventListener("click", function () {
 
         counter = counter - 15;
         audiowrongEl.play();
+
+       
     }
 });
 
@@ -137,6 +146,7 @@ q4El.addEventListener("click", function () {
 
 playagainEl.addEventListener("click", function () {
     window.location.reload();
+    audiowrongEl.pause();
 
 });
 

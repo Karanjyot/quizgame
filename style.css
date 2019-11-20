@@ -43,17 +43,26 @@ li {
 
         width:375px;
         height: 812px;
+
+        background-image: url("./basketball.jpg");
+        background-repeat: no-repeat;
+        
     }
+
+    #h1tag{
+        color:white;
+    }
+
     #jumbotronstart {
 
-        width:350px;
+        width:375px;
         height: 812px;
 
         color: white;
     }
     #jumbotronstart {
 
-        background-image: url("https://i.pinimg.com/originals/53/a2/a3/53a2a3a4f90804ad4e50d2d4ae78f027.jpg");
+        background-image: url("./lebron.jpg");
         background-repeat: no-repeat;
     }
     
