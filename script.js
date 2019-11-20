@@ -19,8 +19,9 @@ var scorearr = []
 
 init()
 
+
 function init() {
- 
+
     var scoress = JSON.parse(localStorage.getItem("high"));
 
     if (scoress !== null) {
@@ -28,8 +29,8 @@ function init() {
     }
 }
 
-function storeTodos() {
-   
+function storeScores() {
+
     localStorage.setItem("high", JSON.stringify(scorearr));
 }
 
@@ -38,6 +39,8 @@ document.getElementById("jumbotronid").style.display = "none";
 document.getElementById("jumbotronfinish").style.display = "none";
 highscorelistEl.style.display = "none";
 
+// start button event listener
+
 startEl.addEventListener("click", function () {
     document.getElementById("jumbotronid").style.display = "block";
 
@@ -45,7 +48,7 @@ startEl.addEventListener("click", function () {
         counter--
         timerEl.innerText = counter
 
-        if(counter === 0 || counter <0) {
+        if (counter === 0 || counter < 0) {
 
             document.getElementById("jumbotronfinish").style.display = "block";
             document.getElementById("jumbotronid").style.display = "none";
@@ -59,11 +62,10 @@ startEl.addEventListener("click", function () {
     audiocorrectEl.play();
 });
 
-
-
+// Main function to select questions from array
 function main() {
 
-    if (questions.length === 0 ) {
+    if (questions.length === 0) {
 
         document.getElementById("gameover").innerHTML = "Game Over! Your final score was: " + counter;
         document.getElementById("jumbotronfinish").style.display = "block";
@@ -83,6 +85,7 @@ main();
 
 
 
+//event listeners for answers/questions
 
 q1El.addEventListener("click", function () {
 
@@ -90,14 +93,14 @@ q1El.addEventListener("click", function () {
         questions.splice(i, 1);
         main();
         audiocorrectEl.play();
-        
+
 
     } else {
 
         counter = counter - 15;
         audiowrongEl.play();
 
-       
+
     }
 });
 
@@ -121,7 +124,7 @@ q3El.addEventListener("click", function () {
         questions.splice(i, 1);
         main();
         audiocorrectEl.play();
-       
+
 
     } else {
 
@@ -144,12 +147,16 @@ q4El.addEventListener("click", function () {
     }
 });
 
+
+// play again event listener
+
 playagainEl.addEventListener("click", function () {
     window.location.reload();
     audiowrongEl.pause();
 
 });
 
+// highscores on first page 
 highscoresEl.addEventListener("click", function () {
     highscorelistEl.style.display = "block";
 
@@ -162,18 +169,19 @@ highscoresEl.addEventListener("click", function () {
         var textnode = document.createTextNode(newscore);
         newli.appendChild(textnode);
         document.getElementById("highscorelist").appendChild(newli);
-        storeTodos()
-        console.log(scorearr);} 
-}, {once : true});
+        storeScores()
+        console.log(scorearr);
+    }
+}, { once: true });
 
-
-highscoresfinishEl.addEventListener("click", function(){
+//high scores on last page 
+highscoresfinishEl.addEventListener("click", function () {
 
     highscorelistEl.style.display = "block";
     scorearr.push(counter);
     scorearr.sort(function (a, b) { return b - a });
     scorearr.length = 5;
-    
+
     for (var i = 0; i < scorearr.length; i++) {
 
         var newscore = scorearr[i];
@@ -182,12 +190,13 @@ highscoresfinishEl.addEventListener("click", function(){
         var textnode = document.createTextNode(newscore);
         newli.appendChild(textnode);
         document.getElementById("highscorelist").appendChild(newli);
-        storeTodos()
-        console.log(scorearr);}
-}, {once : true});
+        storeScores()
+        console.log(scorearr);
+    }
+}, { once: true });
 
 
- 
+
 
 
 
